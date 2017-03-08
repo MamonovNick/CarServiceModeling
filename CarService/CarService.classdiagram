@@ -1,0 +1,469 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="6dd896da-8c37-4bfb-8149-ad95367bd31c" name="CarService" linkedPackageId="6089e0ed-c98f-4ec7-8823-15ed9260bedf" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="c3d63c9f-8e52-4c93-b4a3-e4c065558854">
+      <profileInstance Id="daa3875e-c2c3-4a64-8b06-beeb498e88b7" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="4323001c-4e89-450e-9b25-0d15066aceda">
+      <profileInstance Id="758f3308-ab50-48da-836b-a88437f17f48" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="b8c56091-8153-448b-8ba9-5753afbec635" name="Model" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="cc4f31c1-f453-4c39-b5e0-d7d9d2580765" />
+        <targetEnds>
+          <association Id="eddcaa19-2e1b-40e4-acc1-aeb20bc167ff" isDerived="false" sourceEndRoleName="Model" targetEndRoleName="CarService" isLeaf="false" isAbstract="false">
+            <classMoniker Id="a1109639-0a0d-433d-b598-078840743f46" LastKnownName="CarService" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="cb4107d5-11e4-4b22-bdb0-f05b57cb60a0" name="Model" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="621eaa37-ad00-4104-9996-ef521813faf4" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="cefb98b6-203b-4b94-a934-08face12b801" name="CarService" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="75fe8f52-0375-43a4-9ad8-847128b68f22" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="226cd3d2-d783-4454-8323-f72adf2ead53" />
+          </association>
+        </targetEnds>
+        <ownedAttributesInternal>
+          <property Id="5cc82562-18e1-4418-b56c-b908c4649ac7" name="timer" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="7c33d9ef-f23b-470b-b346-5429d248f0f8" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="a1109639-0a0d-433d-b598-078840743f46" name="CarService" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c2dc5706-4074-4e28-8be6-3bf6df9dea03" />
+        <targetEnds>
+          <association Id="c5f349c4-fc64-4af4-8ddb-b7b72c1faae1" isDerived="false" sourceEndRoleName="CarService" targetEndRoleName="Workshop" isLeaf="false" isAbstract="false">
+            <classMoniker Id="4d5fe01b-658d-4758-a8fe-289250aecc4d" LastKnownName="Workshop" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a3c8fa05-6c49-41f8-89b3-1225945c44c2" name="CarService" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="44a48179-3d1c-4eb2-97ea-f2bfb5738291" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="686f3bef-b093-4924-a5e4-e3a508c055c8" name="Workshop" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <elementDefinition Id="8956ec93-39dd-462b-af44-21b9a3bbbac5" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="608244d3-eab5-4f2d-8575-5a282826a8f7" />
+          </association>
+          <association Id="8ce81930-e5ed-454b-9693-7cd749e430ac" isDerived="false" sourceEndRoleName="CarService" targetEndRoleName="S_Schedule" isLeaf="false" isAbstract="false">
+            <classMoniker Id="c92092aa-b773-4e83-ad17-2408e1a47f06" LastKnownName="S_Schedule" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="53cb03b5-12ef-4b55-bb49-46c2ba1464be" name="CarService" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="30443489-5016-4a3b-a174-265207671229" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="92c9640f-4517-4194-a5bf-72f17f322366" name="S_Schedule" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <elementDefinition Id="a33db3eb-d945-42a7-848f-b835bb02ba96" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="382bbf9c-f76e-4b30-bcf6-454731bef0b1" />
+          </association>
+          <association Id="52729814-41da-4115-887c-1cd9b5e2d493" isDerived="false" sourceEndRoleName="CarService" targetEndRoleName="Services" isLeaf="false" isAbstract="false">
+            <classMoniker Id="e8b890f8-1ddd-47d9-b820-1a9370b10519" LastKnownName="Services" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="2e3e35c5-c6b0-4720-950d-c1415fd3d2ed" name="CarService" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="28608d72-8859-4bc2-a492-75b77c18728f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="796c91ce-aa2a-4252-acd6-61dd12f816bf" name="Services" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
+                  <lowerValueInternal>
+                    <literalString Id="781b8165-ae49-4624-83e0-c3f6c185664a" name="Lower" value="1">
+                      <elementDefinition Id="d1541b03-375e-44bd-97e3-ed73c97fa732" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="8fe7086e-6545-4b86-b1d5-13bdb31e8a5d" name="Upper" value="N">
+                      <elementDefinition Id="19f57f67-8aec-45e4-9c28-7e84959cdcf3" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="5019aeaa-ce6b-45b0-ba58-a59c953b977a" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="848beb45-82c9-4397-a2dc-6b1831ffdd7f" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="4d5fe01b-658d-4758-a8fe-289250aecc4d" name="Workshop" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="fc1a4db6-2e7c-4a6b-83bf-0e9cef51f5f5" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="c92092aa-b773-4e83-ad17-2408e1a47f06" name="S_Schedule" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="8ec1325f-61e6-4656-b786-110975d64bae" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="d56ef6de-a0b1-422b-a8e7-bdd8c334e543" name="Tech_Inspection" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="b131c6e8-0f2d-4dcf-af5e-6a9ada870a25" />
+        <generalsInternal>
+          <generalization Id="d546a1bb-040d-43b9-9b63-9361882c4958" isSubstitutable="false">
+            <classMoniker Id="4d5fe01b-658d-4758-a8fe-289250aecc4d" LastKnownName="Workshop" />
+            <elementDefinition Id="27b175eb-e164-4a7e-b3ad-cf7e2f87e56d" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="5e948390-b7eb-4cdc-a6c8-e23443d0a2c4" isDerived="false" sourceEndRoleName="Tech_Inspection" targetEndRoleName="Queue" isLeaf="false" isAbstract="false">
+            <classMoniker Id="80f9cd20-c5c9-4d83-9d56-acc863c12a6b" LastKnownName="Queue" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="822a3fb4-bfa5-44b1-b354-0305765b437a" name="Tech_Inspection" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="b3fc3121-585c-4913-9be8-8164ac889e40" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="bc184942-103a-44cc-bd3b-db9a035bf21d" name="Queue" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="2bb8bf14-1a33-47b2-ac26-7daa7e59c5fa" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="eedfcade-cdd0-4110-b450-63430f2863ee" />
+          </association>
+          <association Id="d8e0d3f9-f744-4670-b8ed-f2abe2ef3144" isDerived="false" sourceEndRoleName="Tech_Inspection" targetEndRoleName="Master" isLeaf="false" isAbstract="false">
+            <classMoniker Id="8a402b48-8e42-4e87-ac66-bec95f3cf84f" LastKnownName="Master" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="79742f39-768a-4cfe-8fe3-bc97d0830bec" name="Tech_Inspection" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="a176f5ab-11fb-439b-8c18-3fb7eaa7df6f" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="bcfb00c1-ba9e-4938-894b-e61295a16bea" name="Master" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="3885934c-797e-4fdb-be2f-e3fb67f759bd" name="Lower" value="5">
+                      <elementDefinition Id="c67b9b1c-f09e-43e2-a018-e486e50822eb" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="a894ce17-5ca7-481b-976a-b9f679d3b4e5" name="Upper" value="7">
+                      <elementDefinition Id="dc43889e-5158-4394-9571-7c678e63b74c" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="a4ec8a8b-808d-4e73-8873-3c92c6a6f4a9" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="6c2199a3-fafd-42fd-ba03-556d8498542b" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="ba178cf5-9541-4558-bf09-37885003841c" name="BodyShops" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="42220185-f138-4f6d-86f5-a2939663f463" />
+        <generalsInternal>
+          <generalization Id="1efac177-36af-4d30-be74-b3ea64a420e3" isSubstitutable="false">
+            <classMoniker Id="4d5fe01b-658d-4758-a8fe-289250aecc4d" LastKnownName="Workshop" />
+            <elementDefinition Id="247e7852-6f43-4ffc-9955-9dacc093bad2" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="b8d776ae-6079-4746-b5f2-6edb6da0a58e" isDerived="false" sourceEndRoleName="BodyShops" targetEndRoleName="Queue" isLeaf="false" isAbstract="false">
+            <classMoniker Id="80f9cd20-c5c9-4d83-9d56-acc863c12a6b" LastKnownName="Queue" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="12339c81-f5ba-4e60-9c71-96920aa6b5bb" name="BodyShops" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="5ff919fa-35a6-4b11-a329-975a99bea8c7" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="939e46a9-542d-4675-8cb3-889f6399533a" name="Queue" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="a4a2795e-a141-471b-a898-17b76ca08f50" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="fba82920-0236-4bfb-baa8-6024a12e2950" />
+          </association>
+          <association Id="8c21faa6-3099-4d36-a59f-c7a9e8646a51" isDerived="false" sourceEndRoleName="BodyShops" targetEndRoleName="Master" isLeaf="false" isAbstract="false">
+            <classMoniker Id="8a402b48-8e42-4e87-ac66-bec95f3cf84f" LastKnownName="Master" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="9af973bd-4606-423a-8e22-561f49320fdf" name="BodyShops" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="f65efe91-f299-4f3c-be56-2e519ce2882e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4f0f05f1-8c29-47fe-93b5-31573c15acaa" name="Master" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="b71dff3f-7575-420d-a9f0-4103e852c102" name="Lower" value="5">
+                      <elementDefinition Id="9172b4d3-fd58-46ca-9fc0-9ba7dc480c96" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="0d0f6100-0e6a-4e20-bdd0-1b997dc240e8" name="Upper" value="7">
+                      <elementDefinition Id="4e90cccc-065c-4726-830c-8e3866d7a08d" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="313b8eb5-97cf-45f5-9be6-e9ced67f9849" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="027c17cc-d82f-42e1-91dd-30c1e148b4f1" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="1bf0499d-3773-42ee-8d80-9760ce0627fe" name="TireService" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="7e1cb1c3-d7f7-41ca-81bd-14d583394a6c" />
+        <generalsInternal>
+          <generalization Id="1fe1c30b-0e4e-4e12-8482-3404be83d767" isSubstitutable="false">
+            <classMoniker Id="4d5fe01b-658d-4758-a8fe-289250aecc4d" LastKnownName="Workshop" />
+            <elementDefinition Id="9a387310-6f83-4737-9589-859769d8951b" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="a65ff4d6-3535-4852-a04e-ea37c30e0d55" isDerived="false" sourceEndRoleName="TireService" targetEndRoleName="Queue" isLeaf="false" isAbstract="false">
+            <classMoniker Id="80f9cd20-c5c9-4d83-9d56-acc863c12a6b" LastKnownName="Queue" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="71226a6b-0005-4cdf-99ff-62e53b70fbf8" name="TireService" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="1405cd58-04d6-42bc-b172-03dba743ec95" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5f06fd92-26ad-4d1f-b844-98c8cd85197d" name="Queue" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c2abf98f-4686-4586-a105-dd98fe2f22b5" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="8e3d3f6d-5a16-4f56-a751-0785977848da" />
+          </association>
+          <association Id="1abc3aa2-8744-40bb-a4cb-b996d04003d7" isDerived="false" sourceEndRoleName="TireService" targetEndRoleName="Master" isLeaf="false" isAbstract="false">
+            <classMoniker Id="8a402b48-8e42-4e87-ac66-bec95f3cf84f" LastKnownName="Master" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="44ec8110-178b-45f8-81a8-61b7ecbd7f29" name="TireService" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="a9ffe3f7-9a9c-4079-bbbc-0e8d1729995e" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e94c6df9-37fb-414a-8b6a-defd1a19cc03" name="Master" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="9f6c9dfe-c218-49f4-881a-0a53fed3bb43" name="Lower" value="5">
+                      <elementDefinition Id="9d1e50ad-cbf0-427e-b8ec-42201a16a8f9" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="aaf220e9-16f5-4793-81c9-5525a71b1736" name="Upper" value="7">
+                      <elementDefinition Id="b5da0732-924b-4ef8-86dc-ea5de8ce4a94" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="59a25d04-71a0-4e98-8474-6e7f8198a754" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="0d58e194-623c-465d-ae7e-0c298ec19d2a" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="e98ee65a-6d38-497a-b150-fbf4f95bca76" name="GearboxService" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="39ab9f0c-ac26-4994-b852-4dce7ca37404" />
+        <generalsInternal>
+          <generalization Id="186c1c28-da3c-44d0-b0d9-db87ac0dd8c7" isSubstitutable="false">
+            <classMoniker Id="4d5fe01b-658d-4758-a8fe-289250aecc4d" LastKnownName="Workshop" />
+            <elementDefinition Id="f0dc00da-1881-43a6-a176-67628443a164" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="ac4d362d-cb02-4afa-a4b0-56c4ef424dcb" isDerived="false" sourceEndRoleName="GearboxService" targetEndRoleName="Queue" isLeaf="false" isAbstract="false">
+            <classMoniker Id="80f9cd20-c5c9-4d83-9d56-acc863c12a6b" LastKnownName="Queue" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a58cff6e-0a13-4fb6-afc7-0e9850e2cf53" name="GearboxService" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="19d7da71-413e-4446-a1f5-7bdd26ce4300" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="51c0d4bb-b8ac-4fa9-9ef1-5a48f7fa3e82" name="Queue" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="945a411d-cff0-4f30-afa4-e86ff69426d8" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="917ef3bf-0ecf-40a2-af66-92174af42b1f" />
+          </association>
+          <association Id="21f68251-09ff-4da2-8947-b3160c66aaa0" isDerived="false" sourceEndRoleName="GearboxService" targetEndRoleName="Master" isLeaf="false" isAbstract="false">
+            <classMoniker Id="8a402b48-8e42-4e87-ac66-bec95f3cf84f" LastKnownName="Master" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4a4b7776-3e35-4dd4-96c9-7cd47880569c" name="GearboxService" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="1564b9cf-5950-4c40-a2a0-3fcf380767e8" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="67b41298-796b-4662-9ffa-ca73521903a1" name="Master" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="6dd63742-786b-40bd-b3cc-02f3338d2e84" name="Lower" value="5">
+                      <elementDefinition Id="6493b844-814f-4695-8914-c5f65d3e16c1" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="79454bec-4b0e-4032-a083-94f8cd77d05d" name="Upper" value="7">
+                      <elementDefinition Id="df64e2f0-aa35-4fc6-9d09-13cef0095a2e" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="07d5d361-6956-4f12-aba9-239e12149d47" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="dccb78ce-b76a-42d9-b6ba-17dc6696655f" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="7d5d750d-4e6d-4f4b-96d3-daf61d441435" name="EngineService" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="51118cd2-02f5-4022-a23e-1aec7edf198c" />
+        <generalsInternal>
+          <generalization Id="066970c6-c783-4aa5-adab-d982ebaad2d3" isSubstitutable="false">
+            <classMoniker Id="4d5fe01b-658d-4758-a8fe-289250aecc4d" LastKnownName="Workshop" />
+            <elementDefinition Id="4c2f954b-b884-4580-95b3-f88119e7f1eb" />
+          </generalization>
+        </generalsInternal>
+        <targetEnds>
+          <association Id="f847bb3c-74fb-4ea8-8b56-5c4029851254" isDerived="false" sourceEndRoleName="EngineService" targetEndRoleName="Queue" isLeaf="false" isAbstract="false">
+            <classMoniker Id="80f9cd20-c5c9-4d83-9d56-acc863c12a6b" LastKnownName="Queue" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6f47d21a-f00e-40ba-af1c-38b7afb7f0b6" name="EngineService" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="2e7765f1-14a8-4e85-9d13-e44697b097ca" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="a8fb5a4b-e62c-4de6-99be-ab5412a8a075" name="Queue" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="652e698d-92ee-4bbb-99ed-672ee3636778" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="817c51e5-17fb-423e-9dda-71cc8bcc074f" />
+          </association>
+          <association Id="9926482c-51bd-43d4-a8f5-56c7be3e45df" isDerived="false" sourceEndRoleName="EngineService" targetEndRoleName="Master" isLeaf="false" isAbstract="false">
+            <classMoniker Id="8a402b48-8e42-4e87-ac66-bec95f3cf84f" LastKnownName="Master" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="73d3ce47-c895-450d-8d0c-49a9c8f631d2" name="EngineService" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="f6b2a668-1379-40a5-8c53-4f4296080631" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5fc02942-8cc9-4490-8f00-3c1d89e1a16b" name="Master" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="3c4d9388-46fc-4dd1-8385-2eb92651072c" name="Lower" value="5">
+                      <elementDefinition Id="f02c764a-84d3-45f6-82b1-dfd1fc94b514" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="81382ea1-2a7f-4124-a9db-47b494fe5edc" name="Upper" value="7">
+                      <elementDefinition Id="5f89d0af-b634-4878-8978-37ff6d46b43b" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="36780b31-8bba-497e-97e2-6bbb23a37ae5" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="eda49400-d339-4083-9741-7502a02a3aee" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="8a402b48-8e42-4e87-ac66-bec95f3cf84f" name="Master" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a64b51f0-d9ec-4d99-aa9c-b86f67b753fc" />
+        <ownedAttributesInternal>
+          <property Id="c6edabbe-c084-4c8f-8bae-5ebad347ff5c" name="salary" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="b9dabf73-7cdc-4750-9af7-ee2d52d20932" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="8ae8d831-b0f5-47f1-bed3-bc6dc449c7a3" name="Request" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="8b1ca628-7a2d-4074-9984-f4aa8946575e" />
+        <targetEnds>
+          <association Id="5aed6462-367a-4eb3-84cf-e99a5eefd386" isDerived="false" sourceEndRoleName="Request" targetEndRoleName="Master" isLeaf="false" isAbstract="false">
+            <classMoniker Id="8a402b48-8e42-4e87-ac66-bec95f3cf84f" LastKnownName="Master" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="e6a94ae0-b08b-4e83-9aed-e244fa689622" name="Request" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="9c9a30d3-917e-4538-8784-037736c47db1" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="248a7506-e1cd-4601-8d4b-444c95860434" name="Master" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="dee96ce6-984c-462b-838e-b4b666428a95" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c79e9aba-07b4-4a65-985a-791cfe68087b" />
+          </association>
+          <association Id="07dd791b-c3d5-4c39-a661-1bbe22fc949a" isDerived="false" sourceEndRoleName="Request" targetEndRoleName="Services" isLeaf="false" isAbstract="false">
+            <classMoniker Id="e8b890f8-1ddd-47d9-b820-1a9370b10519" LastKnownName="Services" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6a8bf16a-7368-40f3-9daf-38d33548aa4a" name="Request" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="38f6d982-c629-4726-b48b-aeb27de258e6" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="de834b99-7660-402a-a3b2-22958e256fba" name="Services" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <lowerValueInternal>
+                    <literalString Id="60419a64-151d-422f-bf50-01ee3b429162" name="Lower" value="1">
+                      <elementDefinition Id="3b0b06b8-f716-4c15-99d3-77752a063cbd" />
+                    </literalString>
+                  </lowerValueInternal>
+                  <upperValueInternal>
+                    <literalString Id="aa5baa93-e146-44c9-bcca-da07377fcb9c" name="Upper" value="M">
+                      <elementDefinition Id="1fb879a3-6af3-4a01-83e5-68613c09525e" />
+                    </literalString>
+                  </upperValueInternal>
+                  <elementDefinition Id="9b835d8b-cab4-4dea-8f0f-d26b9bc72e87" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="c5425a9c-2a33-496a-abc6-466970ac67db" />
+          </association>
+        </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="e8b890f8-1ddd-47d9-b820-1a9370b10519" name="Services" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="d8a4264f-0d39-4929-b7ca-fab242d913d9" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="80f9cd20-c5c9-4d83-9d56-acc863c12a6b" name="Queue" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2b6bb980-86f9-41c6-9770-3a597016afc2" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="6089e0ed-c98f-4ec7-8823-15ed9260bedf" name="CarService">
+    <elementDefinition Id="92f57821-e35e-430f-8b6f-d138fc7d83bc" />
+  </package>
+</logicalClassDesignerModel>

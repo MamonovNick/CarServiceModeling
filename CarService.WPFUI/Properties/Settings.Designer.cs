@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CarServiceModeling.Properties
+namespace CarService.WPFUI.Properties
 {
 
 
