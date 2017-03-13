@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace CarService.Logic
 {
-    class Workshop
+    abstract class Workshop
     {
-
+        public abstract int getWorkTime();
     }
 
     class TechInspection : Workshop
     {
-
+        public override int getWorkTime() { return 0; }
     }
 }

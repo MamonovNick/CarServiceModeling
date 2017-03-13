@@ -8,5 +8,24 @@ namespace CarService.Logic
 {
     class CarService
     {
+        public Request newRequest;
+
+        CarService()
+        {
+
+        }
+
+        private int check_Request()
+        {
+            return 0;
+        }
+
+
+
+        public void work()
+        {
+
+        }
+
     }
 }
