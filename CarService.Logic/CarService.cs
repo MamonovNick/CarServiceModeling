@@ -9,22 +9,37 @@ namespace CarService.Logic
     class CarService
     {
         public Request newRequest;
+        public Workshop[] workshop;
 
-        CarService()
+        public CarService()
         {
-
+            workshop = new Workshop[5];
+            workshop[0] = new TechInspection();
+            workshop[1] = new BodyShops();
+            workshop[2] = new TireService();
+            workshop[3] = new GearboxService();
+            workshop[4] = new EngineService();
         }
 
-        private int check_Request()
+        void checkAddRequest()
         {
-            return 0;
+            if (newRequest == null)
+                return;
+            //есть новая заявка
+
         }
 
 
 
         public void work()
         {
-
+            //проверка текущего времени??? ночь - не работаем
+            //проверка наличия новой заявки
+            checkAddRequest();
+            foreach(var w in workshop)
+            {
+                w.procWork();
+            }
         }
 
     }

@@ -8,6 +8,8 @@ namespace CarService.Logic
 {
     public class Model
     {
+        CarService cs;
+        CarWorld cw;
         //текущие параметры
         public int overallTime; //общее время моделирования
         public int realTime; //оставшееся время моделирования
@@ -27,10 +29,12 @@ namespace CarService.Logic
         //
         
         public static Random rng = new Random();
-        Model()
+        public Model()
         {
             peakRatio = 0.75;
             ltRatio = 0.5;
+            cs = new CarService();
+            cw = new CarWorld(this, cs);
         }
 
         void modeling()
@@ -41,7 +45,9 @@ namespace CarService.Logic
         void simStep()
         {
             //генерация заявки
+            cw.generateNewRequest();
             //работа а/с
+            cs.work();
             //изменение счетчиков???
 
         }

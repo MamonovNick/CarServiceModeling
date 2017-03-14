@@ -8,19 +8,14 @@ namespace CarService.Logic
 {
     class CarWorld
     {
-        //public double timeRatio { get; set; }
-        //public double intensityRatio { get; set; }
-        //private int numWorkshop { get; set; }
         Model modelObj;
         CarService serviceObj;
-        Workshop[] wsObj;
         double prRequest;
 
-        public CarWorld(Model m, CarService cs, Workshop[] ws)
+        public CarWorld(Model m, CarService cs)
         {
             modelObj = m;
             serviceObj = cs;
-            wsObj = ws;
         }
 
         public void generateNewRequest()
@@ -44,12 +39,13 @@ namespace CarService.Logic
                         i++;
                     }
                 }
-                //генерация времени выполнения заявки
-                for(int j = 0; j < 5; j++)
+                //генерация времени выполнения заявки + вычисление стоимости услуг для каждого цеха
+                for (int j = 0; j < 5; j++)
                 {
                     if (tmp.needWs[j] == false)
                         continue;
-                    tmp.timeForWs[j] = wsObj[j].getWorkTime();
+                    tmp.timeForWs[j] = serviceObj.workshop[j].getWorkTime();
+                    tmp.priceForWs[j] = serviceObj.workshop[j].getPrice();
                 }
                 //передача заявки в автосервис
                 serviceObj.newRequest = tmp;
@@ -76,15 +72,20 @@ namespace CarService.Logic
     {
         public bool complete;
         public int numServ;
-        public int? actualWorkshop;
+        public int? actualWorkshop; // 0 - TechInspection, 1 - BodyShops, 2 - TireService, 3 - GearboxService, 4 - EngineService
         public bool[] needWs;
         public int[] timeForWs;
-
+        public int[] priceForWs;
+        public int overallTimeInCarService;
+        
         public Request()
         {
             needWs = new bool[5] { false, false, false, false, false };
             timeForWs = new int[5];
+            priceForWs = new int[5];
             actualWorkshop = null;
+            overallTimeInCarService = 7 * 24; //общее время нахождеия авто в сервисе
+
         }
     }
 }
