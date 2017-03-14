@@ -71,6 +71,7 @@ namespace CarService.Logic
     public class Request
     {
         public bool complete;
+        public bool outOfTime;
         public int numServ;
         public int? actualWorkshop; // 0 - TechInspection, 1 - BodyShops, 2 - TireService, 3 - GearboxService, 4 - EngineService
         public bool[] needWs;
@@ -80,12 +81,13 @@ namespace CarService.Logic
         
         public Request()
         {
+            complete = false;
+            outOfTime = false;
             needWs = new bool[5] { false, false, false, false, false };
             timeForWs = new int[5];
             priceForWs = new int[5];
             actualWorkshop = null;
             overallTimeInCarService = 7 * 24; //общее время нахождеия авто в сервисе
-
         }
     }
 }

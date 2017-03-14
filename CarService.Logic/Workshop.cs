@@ -8,12 +8,12 @@ namespace CarService.Logic
 {
     class Master
     {
-        public int profit;
-        public byte percentOfCP;
+        public double profit;
+        public double percentOfCP;
         public bool free;
         public Request actualTimeRequest;
 
-        public Master(byte pCP = 35)
+        public Master(double pCP = 0.35)
         {
             free = true;
             profit = 0;
@@ -21,23 +21,36 @@ namespace CarService.Logic
             actualTimeRequest = null;
         }
 
-        public void workWithRequest()
+        //работа с заявкой
+        public int workWithRequest(int cMW)
         {
-            //do smth with request
-            
+            //проверка на истечение срока нахождения на СТО
+            if (--actualTimeRequest.overallTimeInCarService == 0)
+                return -1;
+            //"выполнение" работы, проверка на кончание работы
+            if (--actualTimeRequest.timeForWs[cMW] == 0)
+            {
+                free = true;
+                //начисление зарплаты
+                profit += actualTimeRequest.priceForWs[cMW] * percentOfCP;
+                return 1;
+            }
+            return 0;
         }
     }
 
     class Workshop
     {
+        public CarService cs;
         protected byte numMasters;
         protected byte readyMasters;
         protected List<Request> queueWs;
         protected List<Request> requestInWork;
         protected List<Master> masterInWs;
 
-        public Workshop(byte nM = 1)
+        public Workshop(CarService c, byte nM)
         {
+            cs = c;
             queueWs = new List<Request>();
             requestInWork = new List<Request>();
             masterInWs = new List<Master>();
@@ -56,11 +69,22 @@ namespace CarService.Logic
             //работа с текущими заявками
             foreach (var m in masterInWs)
             {
-                m.workWithRequest();
-                if (m.free)
+                switch (m.workWithRequest(cMW))
                 {
-                    //delete request
-                    readyMasters++;
+                    case 1:
+                        cs.procFinRWs(cMW, m.actualTimeRequest);
+                        m.actualTimeRequest.actualWorkshop = null;
+                        requestInWork.Remove(m.actualTimeRequest);
+                        m.actualTimeRequest = null;
+                        break;
+                    case 0:
+                        break;
+                    case -1:
+                        m.actualTimeRequest.actualWorkshop = null;
+                        m.actualTimeRequest.outOfTime = true;
+                        requestInWork.Remove(m.actualTimeRequest);
+                        m.actualTimeRequest = null;
+                        break;
                 }
             }
 
@@ -69,9 +93,15 @@ namespace CarService.Logic
             int j = 0;
             while (readyMasters != 0)
             {
-                //take free request
+                //take free request >
                 while (i < queueWs.Count)
                 {
+                    if (queueWs[i].outOfTime)
+                    {
+                        queueWs.RemoveAt(i);
+                        continue;
+                    }
+
                     if (queueWs[i].actualWorkshop == null)
                     {
                         queueWs[i].actualWorkshop = cMW;
@@ -93,6 +123,8 @@ namespace CarService.Logic
 
     class TechInspection : Workshop
     {
+        public TechInspection(CarService cs, byte c = 1) : base(cs, c) { }
+
         public override int getWorkTime() { return 0; }
 
         public override void procWork()
@@ -102,7 +134,8 @@ namespace CarService.Logic
     }
     class BodyShops : Workshop
     {
-        
+        public BodyShops(CarService cs, byte c = 1) : base(cs, c) { }
+
         public override int getWorkTime() { return 0; }
 
         public override void procWork()
@@ -112,6 +145,8 @@ namespace CarService.Logic
     }
     class TireService : Workshop
     {
+        public TireService(CarService cs, byte c = 1) : base(cs, c) { }
+
         public override int getWorkTime() { return 0; }
 
         public override void procWork()
@@ -121,6 +156,8 @@ namespace CarService.Logic
     }
     class GearboxService : Workshop
     {
+        public GearboxService(CarService cs, byte c = 1) : base(cs, c) { }
+
         public override int getWorkTime() { return 0; }
 
         public override void procWork()
@@ -130,6 +167,8 @@ namespace CarService.Logic
     }
     class EngineService : Workshop
     {
+        public EngineService(CarService cs, byte c = 1) : base(cs, c) { }
+
         public override int getWorkTime() { return 0; }
 
         public override void procWork()
