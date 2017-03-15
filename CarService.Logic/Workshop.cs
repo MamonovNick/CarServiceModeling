@@ -39,17 +39,19 @@ namespace CarService.Logic
         }
     }
 
-    class Workshop
+    abstract class Workshop
     {
-        public CarService cs;
+        protected Random rnd;
+        protected CarService cs;
         protected byte numMasters;
         protected byte readyMasters;
         protected List<Request> queueWs;
         protected List<Request> requestInWork;
         protected List<Master> masterInWs;
 
-        public Workshop(CarService c, byte nM)
+        public Workshop(Random m, CarService c, byte nM)
         {
+            rnd = m;
             cs = c;
             queueWs = new List<Request>();
             requestInWork = new List<Request>();
@@ -58,10 +60,12 @@ namespace CarService.Logic
         }
 
         //генерация времени выполнения заявки в текущем ws
-        public virtual int getWorkTime() { return 0; }
+        public abstract int getWorkTime();
 
-        public virtual int getPrice() { return 0; }
+        //генерация стоимости услуг + временной погрешности выполнения работ
+        public abstract double getPrice(int time);
 
+        //выполнение работ цехом
         public virtual void procWork() { return; }
 
         protected void procCurWork(int cMW)
@@ -72,6 +76,7 @@ namespace CarService.Logic
                 switch (m.workWithRequest(cMW))
                 {
                     case 1:
+                        m.actualTimeRequest.numServ--;
                         cs.procFinRWs(cMW, m.actualTimeRequest);
                         m.actualTimeRequest.actualWorkshop = null;
                         requestInWork.Remove(m.actualTimeRequest);
@@ -123,9 +128,19 @@ namespace CarService.Logic
 
     class TechInspection : Workshop
     {
-        public TechInspection(CarService cs, byte c = 1) : base(cs, c) { }
+        public TechInspection(Random m, CarService cs, byte c = 1) : base(m, cs, c) { }
 
-        public override int getWorkTime() { return 0; }
+        public override int getWorkTime()
+        {
+            //время выполнения + погрешность 
+            return rnd.Next(25, 90) + rnd.Next(10, 25);
+        }
+
+        public override double getPrice(int time)
+        {
+            //стоимость выполнения 
+            return 500 * (time / 60);
+        }
 
         public override void procWork()
         {
@@ -134,9 +149,19 @@ namespace CarService.Logic
     }
     class BodyShops : Workshop
     {
-        public BodyShops(CarService cs, byte c = 1) : base(cs, c) { }
+        public BodyShops(Random m, CarService cs, byte c = 1) : base(m, cs, c) { }
 
-        public override int getWorkTime() { return 0; }
+        public override int getWorkTime()
+        {
+            //время выполнения + погрешность 
+            return rnd.Next(120, 2160) + rnd.Next(10, 720);
+        }
+
+        public override double getPrice(int time)
+        {
+            //стоимость выполнения
+            return 2000 * (time / 60);
+        }
 
         public override void procWork()
         {
@@ -145,9 +170,19 @@ namespace CarService.Logic
     }
     class TireService : Workshop
     {
-        public TireService(CarService cs, byte c = 1) : base(cs, c) { }
+        public TireService(Random m, CarService cs, byte c = 1) : base(m, cs, c) { }
 
-        public override int getWorkTime() { return 0; }
+        public override int getWorkTime()
+        {
+            //время выполнения + погрешность 
+            return rnd.Next(5, 20) + rnd.Next(2, 5);
+        }
+
+        public override double getPrice(int time)
+        {
+            //стоимость выполнения
+            return 200 * (time / 60);
+        }
 
         public override void procWork()
         {
@@ -156,9 +191,19 @@ namespace CarService.Logic
     }
     class GearboxService : Workshop
     {
-        public GearboxService(CarService cs, byte c = 1) : base(cs, c) { }
+        public GearboxService(Random m, CarService cs, byte c = 1) : base(m, cs, c) { }
 
-        public override int getWorkTime() { return 0; }
+        public override int getWorkTime()
+        {
+            //время выполнения + погрешность 
+            return rnd.Next(60, 2160) + rnd.Next(15, 720);
+        }
+
+        public override double getPrice(int time)
+        {
+            //стоимость выполнения 
+            return 1500*(time / 60);
+        }
 
         public override void procWork()
         {
@@ -167,9 +212,19 @@ namespace CarService.Logic
     }
     class EngineService : Workshop
     {
-        public EngineService(CarService cs, byte c = 1) : base(cs, c) { }
+        public EngineService(Random m, CarService cs, byte c = 1) : base(m, cs, c) { }
 
-        public override int getWorkTime() { return 0; }
+        public override int getWorkTime()
+        {
+            //время выполнения + погрешность 
+            return rnd.Next(20, 2880) + rnd.Next(5, 720);
+        }
+
+        public override double getPrice(int time)
+        {
+            //стоимость выполнения
+            return 2500 * (time / 60);
+        }
 
         public override void procWork()
         {

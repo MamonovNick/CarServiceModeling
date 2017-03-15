@@ -14,17 +14,17 @@ namespace CarService.Logic
         public double overallCarServiceProfit;
         public double[] wsProfit;
 
-        public CarService()
+        public CarService(Random r)
         {
             servicepCP = 0.75;
             overallCarServiceProfit = 0;
             wsProfit = new double[5] { 0, 0, 0, 0, 0 };
             workshop = new Workshop[5];
-            workshop[0] = new TechInspection(this);
-            workshop[1] = new BodyShops(this);
-            workshop[2] = new TireService(this);
-            workshop[3] = new GearboxService(this);
-            workshop[4] = new EngineService(this);
+            workshop[0] = new TechInspection(r, this);
+            workshop[1] = new BodyShops(r, this);
+            workshop[2] = new TireService(r, this);
+            workshop[3] = new GearboxService(r, this);
+            workshop[4] = new EngineService(r, this);
         }
 
         void checkAddRequest()
@@ -54,16 +54,6 @@ namespace CarService.Logic
         {
             overallCarServiceProfit += r.priceForWs[ws] * servicepCP;
             wsProfit[ws] += r.priceForWs[ws] * servicepCP;
-
-            bool c = true;
-            foreach (var t in r.timeForWs)
-                if (t != 0)
-                {
-                    c = false;
-                    break;
-                }
-            if (c)
-                r.complete = true;
         }
     }
 }

@@ -33,13 +33,13 @@ namespace CarService.Logic
         {
             peakRatio = 0.75;
             ltRatio = 0.5;
-            cs = new CarService();
+            cs = new CarService(rng);
             cw = new CarWorld(this, cs);
         }
 
         void modeling()
         {
-
+            //modeling
         }
 
         void simStep()

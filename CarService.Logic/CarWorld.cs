@@ -45,7 +45,7 @@ namespace CarService.Logic
                     if (tmp.needWs[j] == false)
                         continue;
                     tmp.timeForWs[j] = serviceObj.workshop[j].getWorkTime();
-                    tmp.priceForWs[j] = serviceObj.workshop[j].getPrice();
+                    tmp.priceForWs[j] = serviceObj.workshop[j].getPrice(tmp.timeForWs[j]);
                 }
                 //передача заявки в автосервис
                 serviceObj.newRequest = tmp;
@@ -70,24 +70,22 @@ namespace CarService.Logic
 
     public class Request
     {
-        public bool complete;
         public bool outOfTime;
         public int numServ;
         public int? actualWorkshop; // 0 - TechInspection, 1 - BodyShops, 2 - TireService, 3 - GearboxService, 4 - EngineService
         public bool[] needWs;
-        public int[] timeForWs;
-        public int[] priceForWs;
-        public int overallTimeInCarService;
+        public int[] timeForWs; //мин
+        public double[] priceForWs;
+        public int overallTimeInCarService; //мин
         
         public Request()
         {
-            complete = false;
             outOfTime = false;
             needWs = new bool[5] { false, false, false, false, false };
             timeForWs = new int[5];
-            priceForWs = new int[5];
+            priceForWs = new double[5];
             actualWorkshop = null;
-            overallTimeInCarService = 7 * 24; //общее время нахождеия авто в сервисе
+            overallTimeInCarService = 7 * 24 * 60; //общее время нахождеия авто в сервисе
         }
     }
 }
