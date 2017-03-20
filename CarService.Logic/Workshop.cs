@@ -8,13 +8,15 @@ namespace CarService.Logic
 {
     class Master
     {
+        Statistics st;
         public double profit;
         public double percentOfCP;
         public bool free;
         public Request actualTimeRequest;
 
-        public Master(double pCP = 0.35)
+        public Master(Statistics s, double pCP = 0.35)
         {
+            st = s;
             free = true;
             profit = 0;
             percentOfCP = pCP;
@@ -24,6 +26,9 @@ namespace CarService.Logic
         //работа с заявкой
         public int workWithRequest(int cMW)
         {
+            if (actualTimeRequest == null)
+                return 0;
+            Console.WriteLine("Master of " + cMW + " work with " + actualTimeRequest.numberRequest);
             //проверка на истечение срока нахождения на СТО
             if (--actualTimeRequest.overallTimeInCarService == 0)
                 return -1;
@@ -31,6 +36,24 @@ namespace CarService.Logic
             if (--actualTimeRequest.timeForWs[cMW] == 0)
             {
                 free = true;
+                switch (cMW)
+                {
+                    case 0:
+                        st.Ws0--;
+                        break;
+                    case 1:
+                        st.Ws1--;
+                        break;
+                    case 2:
+                        st.Ws2--;
+                        break;
+                    case 3:
+                        st.Ws3--;
+                        break;
+                    case 4:
+                        st.Ws4--;
+                        break;
+                }
                 //начисление зарплаты
                 profit += actualTimeRequest.priceForWs[cMW] * percentOfCP;
                 return 1;
@@ -41,22 +64,26 @@ namespace CarService.Logic
 
     abstract class Workshop
     {
-        protected Random rnd;
-        protected CarService cs;
-        protected byte numMasters;
-        protected byte readyMasters;
-        protected List<Request> queueWs;
-        protected List<Request> requestInWork;
-        protected List<Master> masterInWs;
+        public Statistics st;
+        public Random rnd;
+        public CarService cs;
+        public byte numMasters;
+        public byte readyMasters;
+        public List<Request> queueWs;
+        public List<Request> requestInWork;
+        public List<Master> masterInWs;
 
-        public Workshop(Random m, CarService c, byte nM)
+        public Workshop(Random m, CarService c, byte nM, Statistics s)
         {
+            st = s;
             rnd = m;
             cs = c;
             queueWs = new List<Request>();
             requestInWork = new List<Request>();
             masterInWs = new List<Master>();
             readyMasters = numMasters = nM;
+            for (int i = 0; i < nM; i++)
+                masterInWs.Add(new Master(st));
         }
 
         //генерация времени выполнения заявки в текущем ws
@@ -68,8 +95,64 @@ namespace CarService.Logic
         //выполнение работ цехом
         public virtual void procWork() { return; }
 
+        public void addRequest(Request r)
+        {
+            queueWs.Add(r);
+        }
+
         protected void procCurWork(int cMW)
         {
+            //набор заявок для свободных мастеров
+            int i = 0; //по заявкам
+            int j = 0; //по мастерам
+            //выбираем свободные заявки
+            while (i < queueWs.Count)
+            {
+                //проверка на наличие свободных мастеров
+                if (readyMasters == 0)
+                    break;
+
+                if (queueWs[i].outOfTime)
+                {
+                    queueWs.RemoveAt(i);
+                    continue;
+                }
+
+                if (queueWs[i].actualWorkshop == null)
+                {
+                    queueWs[i].actualWorkshop = cMW;
+                    while (j < masterInWs.Count)
+                        if (masterInWs[j].free)
+                            break;
+                        else j++;
+                    masterInWs[j].free = false;
+                    readyMasters--;
+                    switch (cMW)
+                    {
+                        case 0:
+                            st.Ws0++;
+                            break;
+                        case 1:
+                            st.Ws1++;
+                            break;
+                        case 2:
+                            st.Ws2++;
+                            break;
+                        case 3:
+                            st.Ws3++;
+                            break;
+                        case 4:
+                            st.Ws4++;
+                            break;
+                    }
+                    masterInWs[j].actualTimeRequest = queueWs[i];
+                    requestInWork.Add(queueWs[i]);
+                    queueWs.RemoveAt(i);
+                    continue;
+                }
+                i++;
+            }
+
             //работа с текущими заявками
             foreach (var m in masterInWs)
             {
@@ -77,58 +160,30 @@ namespace CarService.Logic
                 {
                     case 1:
                         m.actualTimeRequest.numServ--;
-                        cs.procFinRWs(cMW, m.actualTimeRequest);
+                        cs.procFinRWs(1, cMW, m.actualTimeRequest);
                         m.actualTimeRequest.actualWorkshop = null;
                         requestInWork.Remove(m.actualTimeRequest);
                         m.actualTimeRequest = null;
+                        readyMasters++;
                         break;
                     case 0:
                         break;
                     case -1:
+                        cs.procFinRWs(-1);
                         m.actualTimeRequest.actualWorkshop = null;
                         m.actualTimeRequest.outOfTime = true;
                         requestInWork.Remove(m.actualTimeRequest);
                         m.actualTimeRequest = null;
+                        readyMasters++;
                         break;
                 }
-            }
-
-            //набор заявок для свободных мастеров
-            int i = 0;
-            int j = 0;
-            while (readyMasters != 0)
-            {
-                //take free request >
-                while (i < queueWs.Count)
-                {
-                    if (queueWs[i].outOfTime)
-                    {
-                        queueWs.RemoveAt(i);
-                        continue;
-                    }
-
-                    if (queueWs[i].actualWorkshop == null)
-                    {
-                        queueWs[i].actualWorkshop = cMW;
-                        while (j < masterInWs.Count)
-                            if (masterInWs[j].free)
-                                break;
-                            else j++;
-                        masterInWs[j].free = false;
-                        masterInWs[j].actualTimeRequest = queueWs[i];
-                        requestInWork.Add(queueWs[i]);
-                        queueWs.RemoveAt(i);
-                    }
-                    i++;
-                }
-                readyMasters--;
             }
         }
     }
 
     class TechInspection : Workshop
     {
-        public TechInspection(Random m, CarService cs, byte c = 1) : base(m, cs, c) { }
+        public TechInspection(Random m, CarService cs, Statistics s, byte c = 1) : base(m, cs, c, s) { }
 
         public override int getWorkTime()
         {
@@ -144,12 +199,13 @@ namespace CarService.Logic
 
         public override void procWork()
         {
+            Console.WriteLine("Workshop #0 of" + numMasters);
             procCurWork(0);
         }
     }
     class BodyShops : Workshop
     {
-        public BodyShops(Random m, CarService cs, byte c = 1) : base(m, cs, c) { }
+        public BodyShops(Random m, CarService cs, Statistics s, byte c = 1) : base(m, cs, c, s) { }
 
         public override int getWorkTime()
         {
@@ -165,12 +221,13 @@ namespace CarService.Logic
 
         public override void procWork()
         {
+            Console.WriteLine("Workshop #1 of" + numMasters);
             procCurWork(1);
         }
     }
     class TireService : Workshop
     {
-        public TireService(Random m, CarService cs, byte c = 1) : base(m, cs, c) { }
+        public TireService(Random m, CarService cs, Statistics s, byte c = 1) : base(m, cs, c, s) { }
 
         public override int getWorkTime()
         {
@@ -186,12 +243,13 @@ namespace CarService.Logic
 
         public override void procWork()
         {
+            Console.WriteLine("Workshop #2 of" + numMasters);
             procCurWork(2);
         }
     }
     class GearboxService : Workshop
     {
-        public GearboxService(Random m, CarService cs, byte c = 1) : base(m, cs, c) { }
+        public GearboxService(Random m, CarService cs, Statistics s, byte c = 1) : base(m, cs, c, s) { }
 
         public override int getWorkTime()
         {
@@ -202,17 +260,18 @@ namespace CarService.Logic
         public override double getPrice(int time)
         {
             //стоимость выполнения 
-            return 1500*(time / 60);
+            return 1500 * (time / 60);
         }
 
         public override void procWork()
         {
+            Console.WriteLine("Workshop #3 of" + numMasters);
             procCurWork(3);
         }
     }
     class EngineService : Workshop
     {
-        public EngineService(Random m, CarService cs, byte c = 1) : base(m, cs, c) { }
+        public EngineService(Random m, CarService cs, Statistics s, byte c = 1) : base(m, cs, c, s) { }
 
         public override int getWorkTime()
         {
@@ -228,6 +287,7 @@ namespace CarService.Logic
 
         public override void procWork()
         {
+            Console.WriteLine("Workshop #4 of" + numMasters);
             procCurWork(4);
         }
     }

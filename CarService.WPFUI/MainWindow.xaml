@@ -3,10 +3,246 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
         xmlns:local="clr-namespace:CarService.WPFUI"
+        xmlns:l2="clr-namespace:CarService.Logic;assembly=CarService.Logic"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Автосервис" Height="559" Width="946.74" Icon="Icons/assembly_line.ico" MinWidth="857" MinHeight="559">
+    <Window.Resources>
+        <l2:Statistics RequestGen="1" x:Key="Rg" />
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.Row="0" Grid.ColumnSpan="2" Height="Auto" VerticalAlignment="Top">
+            <MenuItem Header="File">
+                <MenuItem Header="New Model" />
+                <MenuItem Header="Open Model" >
+                    <MenuItem Header="Local"/>
+                    <MenuItem Header="From disk" />
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Exit" />
+            </MenuItem>
+            <MenuItem Header="Edit" />
+            <MenuItem Header="View" />
+        </Menu>
+        <Canvas Grid.Row="1" Margin="-5,0.4,5.4,134" Grid.RowSpan="2" DataContext="{StaticResource Rg}">
+            <TextBlock > <Run Text="ТехОсмотр"/></TextBlock>
+            <ProgressBar x:Name="pb0" Height="83" Canvas.Left="16" Canvas.Top="40" Width="120" RenderTransformOrigin="0.5,0.5" Value="{Binding Ws0, Mode=TwoWay}" ValueChanged="pb0_ValueChanged" Maximum="2" Foreground="Lime">
+                <ProgressBar.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ProgressBar.RenderTransform>
+            </ProgressBar>
+            <TextBlock Margin="70, 0"><Run Text="Кузовной ремонт"/></TextBlock>
+            <ProgressBar x:Name="pb1" Height="61" Canvas.Left="159" Canvas.Top="50" Width="100" RenderTransformOrigin="0.5,0.5" Value="{Binding Ws1, Mode=TwoWay}" ValueChanged="pb1_ValueChanged" Maximum="2" Foreground="Lime">
+                <ProgressBar.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ProgressBar.RenderTransform>
+            </ProgressBar>
+            <TextBlock Margin="140, 0"><Run Text="Шиномонтаж"/></TextBlock>
+            <ProgressBar x:Name="pb2" Height="61" Canvas.Left="234" Canvas.Top="50" Width="100" RenderTransformOrigin="0.5,0.5" Value="{Binding Ws2, Mode=TwoWay}" ValueChanged="pb2_ValueChanged" Maximum="2" Foreground="Lime">
+                <ProgressBar.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ProgressBar.RenderTransform>
+            </ProgressBar>
+            <TextBlock Margin="210, 0"><Run Text="Ремонт КПП"/></TextBlock>
+            <ProgressBar x:Name="pb3" Height="61" Canvas.Left="306" Canvas.Top="50" Width="100" RenderTransformOrigin="0.5,0.5" Value="{Binding Ws3, Mode=TwoWay}" ValueChanged="pb3_ValueChanged" Maximum="2" Foreground="Lime">
+                <ProgressBar.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ProgressBar.RenderTransform>
+            </ProgressBar>
+            <TextBlock Margin="280, 0"><Run Text="Ремонт двигаетлей"/></TextBlock>
+            <ProgressBar x:Name="pb4" Height="61" Canvas.Left="377" Canvas.Top="54" Width="100" RenderTransformOrigin="0.5,0.5" Value="{Binding Ws4, Mode=TwoWay}" ValueChanged="pb4_ValueChanged" Maximum="2" Foreground="Lime">
+                <ProgressBar.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-90"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ProgressBar.RenderTransform>
+            </ProgressBar>
+        </Canvas>
+        <GroupBox x:Name="SettingsGroupBox" Grid.Row="1" Grid.Column="1" Header="Настройка" Padding="5">
+            <ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Expander Grid.ColumnSpan="2" Header="Количество мастеров на цех">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="0.28*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Text="Техосмотр"/>
+                            <TextBlock Grid.Row="1" Text="Кузовной ремонт"/>
+                            <TextBlock Grid.Row="2" Text="Шиномонтаж"/>
+                            <TextBlock Grid.Row="3" Text="Ремонт КПП"/>
+                            <TextBlock Grid.Row="4" Text="Ремонт двигателей"/>
+                            <dxe:SpinEdit x:Name="TI" Grid.Row="0" Grid.Column="1" Value="5" MaxValue="10" MinValue="1" IsFloatValue="False" EditValueChanged="TI_EditValueChanged"/>
+                            <dxe:SpinEdit x:Name="BS" Grid.Row="1" Grid.Column="1" Value="5" MaxValue="10" MinValue="1" IsFloatValue="False" EditValueChanged="BS_EditValueChanged"/>
+                            <dxe:SpinEdit x:Name="TS" Grid.Row="2" Grid.Column="1" Value="5" MaxValue="10" MinValue="1" IsFloatValue="False" EditValueChanged="TS_EditValueChanged"/>
+                            <dxe:SpinEdit x:Name="RG" Grid.Row="3" Grid.Column="1" Value="5" MaxValue="10" MinValue="1" IsFloatValue="False" EditValueChanged="RG_EditValueChanged"/>
+                            <dxe:SpinEdit x:Name="RE" Grid.Row="4" Grid.Column="1" Value="5" MaxValue="10" MinValue="1" IsFloatValue="False" EditValueChanged="RE_EditValueChanged"/>
+                        </Grid>
+                    </Expander>
+                    <TextBlock Grid.Row="1"><Run Text="Шаг моделирования"/></TextBlock>
+                    <TextBox x:Name="stepNum" Grid.Row="1" Grid.Column="1" Margin="20,0,0,0" Text="3" TextChanged="stepNum_TextChanged" TextInput="stepNum_TextInput" />
+                    <TextBlock Grid.Row="2"><Run Text="Интенсивность появления заявок"/></TextBlock>
+                    <Slider x:Name="SliderIntens" Grid.ColumnSpan="2" Grid.Row="3" Value="0.7" Minimum="0" Maximum="1" SelectionStart="0" Height="30" 
+                        IsSelectionRangeEnabled="True" ValueChanged="SliderIntens_ValueChanged" Margin="15,0"/>
+                    <TextBlock Grid.Row="4"><Run Text="Вероятность ошибки мастера"/></TextBlock>
+                    <Slider Grid.ColumnSpan="2" Grid.Row="5" Value="0" Minimum="0" Maximum="1" SelectionStart="0" Height="30" 
+                        IsSelectionRangeEnabled="True" ValueChanged="SliderError_ValueChanged" Margin="15,0"/>
+                    <TextBlock Grid.Row="6"><Run Text="Время нахождения авто в очереди, дней"/></TextBlock>
+                    <Slider Grid.ColumnSpan="2" Grid.Row="7" Value="7" Minimum="1" Maximum="14" SelectionStart="0" Height="30" 
+                        IsSelectionRangeEnabled="True" ValueChanged="SliderOverallTime_ValueChanged" Margin="15,0" SmallChange="1" TickPlacement="BottomRight" IsSnapToTickEnabled="True"/>
+                    <Expander Grid.Row="8" Grid.ColumnSpan="2" Header="Продолжительность моделирования">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Text="Дни"/>
+                            <TextBlock Grid.Row="1" Text="Часы"/>
+                            <TextBlock Grid.Row="2" Text="Минуты"/>
+                            <dxe:SpinEdit x:Name="MDay" Grid.Row="0" Grid.Column="1" Value="1" MinValue="0" IsFloatValue="False" EditValueChanged="MDay_EditValueChanged"/>
+                            <dxe:SpinEdit x:Name="MHour" Grid.Row="1" Grid.Column="1" Value="0" MaxValue="23" MinValue="0" IsFloatValue="False" EditValueChanged="MHour_EditValueChanged"/>
+                            <dxe:SpinEdit x:Name="MMin" Grid.Row="2" Grid.Column="1" Value="0" MaxValue="59" MinValue="0" IsFloatValue="False" EditValueChanged="MMin_EditValueChanged"/>
+                        </Grid>
+                    </Expander>
+                    <Expander Grid.Row="9" Grid.ColumnSpan="2" Header="Время начала моделирования">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="0.5*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Text="День недели"/>
+                            <TextBlock Grid.Row="1" Text="Час"/>
+                            <TextBlock Grid.Row="2" Text="Минута"/>
+                            <ComboBox x:Name="StartDay" Grid.Row="0" Grid.Column="1" SelectedIndex="0" SelectionChanged="StartDay_SelectionChanged">
+                                <TextBlock Text="Понедельник"/>
+                                <TextBlock Text="Вторник"/>
+                                <TextBlock Text="Среда"/>
+                                <TextBlock Text="Четверг"/>
+                                <TextBlock Text="Пятница"/>
+                                <TextBlock Text="Суббота"/>
+                                <TextBlock Text="Воскресение"/>
+                            </ComboBox>
+                            <dxe:SpinEdit x:Name="StartHour" Grid.Row="1" Grid.Column="1" Value="0" MaxValue="23" MinValue="0" IsFloatValue="False" EditValueChanged="StartHour_EditValueChanged"/>
+                            <dxe:SpinEdit x:Name="StartMin" Grid.Row="2" Grid.Column="1" Value="0" MaxValue="59" MinValue="0" IsFloatValue="False" EditValueChanged="StartMin_EditValueChanged"/>
+                        </Grid>
+                    </Expander>
+                </Grid>
+            </ScrollViewer>
+        </GroupBox>
+        <GroupBox Grid.Row="2" Header="Статистика" Padding="5">
+            <StackPanel DataContext="{StaticResource Rg}" Margin="0,0,-0.2,0">
+                <TextBlock x:Name="ProfitTxt"/>
+                <TextBlock x:Name="Txt1" Text="{Binding RequestGen, Mode=TwoWay}"/>
+                <TextBlock x:Name="Txt2"/>
+                <TextBlock x:Name="Txt3"/>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Row="2" Grid.Column="1" Header="Управление">
+            <TabControl x:Name="control">
+                <TabItem x:Name="autoCtrl" Height="16">
+                    <TabItem.Header>
+                        <TextBlock Margin="0.25" FontSize="8">Автоматический режим</TextBlock>
+                    </TabItem.Header>
+                    <TabItem.Content>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.35*"/>
+                                <ColumnDefinition Width="0.2*"/>
+                                <ColumnDefinition Width="0.35*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="StartBtn" Grid.Column="1" Margin="3" Click="StartBtn_Click">
+                                <Image Source="Icons/play.ico" Height="31" Width="31"/>
+                            </Button>
+                            <Button x:Name="StopBtn" Grid.Row="1" Grid.Column="1" Margin="3" Click="StopBtn_Click">
+                                <Image Source="Icons/stop.ico" Height="31" Width="31"/>
+                            </Button>
+                        </Grid>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem x:Name="manCtrl" Height="16">
+                    <TabItem.Header>
+                        <TextBlock Margin="0.25" FontSize="8">Ручной режим</TextBlock>
+                    </TabItem.Header>
+                </TabItem>
+            </TabControl>
+        </GroupBox>
+
     </Grid>
 </Window>

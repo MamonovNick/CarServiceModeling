@@ -22,11 +22,15 @@ namespace CarService.Logic
         {
             //вероятность поступления заявки
             prRequest = modelObj.intensityRatio * timePr();
+
+            prRequest = 0.25;
+
             if (Model.rng.NextDouble() <= prRequest)
             {
                 //создание заявки
                 Request tmp = new Request();
                 tmp.numServ = Model.rng.Next(1, 6);
+                Console.WriteLine(tmp.numServ);
                 int randomWs;
                 int i = 0;
                 //выбор цехов для посещения
@@ -37,8 +41,10 @@ namespace CarService.Logic
                     {
                         tmp.needWs[randomWs] = true;
                         i++;
-                    }
+                        Console.Write(randomWs + "    ");
+                    }   
                 }
+                Console.WriteLine();
                 //генерация времени выполнения заявки + вычисление стоимости услуг для каждого цеха
                 for (int j = 0; j < 5; j++)
                 {
@@ -46,7 +52,9 @@ namespace CarService.Logic
                         continue;
                     tmp.timeForWs[j] = serviceObj.workshop[j].getWorkTime();
                     tmp.priceForWs[j] = serviceObj.workshop[j].getPrice(tmp.timeForWs[j]);
+                    Console.Write(tmp.timeForWs[j] + "    ");
                 }
+                Console.WriteLine();
                 //передача заявки в автосервис
                 serviceObj.newRequest = tmp;
             }
@@ -61,7 +69,7 @@ namespace CarService.Logic
         //определение коэффициента времени суток
         private double timePr()
         {
-            if ((modelObj.timeOfDay <= 10) && (modelObj.timeOfDay >= 18))
+            if ((modelObj.timeHour <= 10) && (modelObj.timeHour >= 18))
                 return modelObj.ltRatio;
             else
                 return modelObj.peakRatio;
@@ -70,6 +78,8 @@ namespace CarService.Logic
 
     public class Request
     {
+        public static int amountRequest = 0;
+        public int numberRequest;
         public bool outOfTime;
         public int numServ;
         public int? actualWorkshop; // 0 - TechInspection, 1 - BodyShops, 2 - TireService, 3 - GearboxService, 4 - EngineService
@@ -80,6 +90,7 @@ namespace CarService.Logic
         
         public Request()
         {
+            numberRequest = amountRequest++;
             outOfTime = false;
             needWs = new bool[5] { false, false, false, false, false };
             timeForWs = new int[5];
