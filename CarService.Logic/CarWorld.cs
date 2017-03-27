@@ -30,7 +30,6 @@ namespace CarService.Logic
                 //создание заявки
                 Request tmp = new Request();
                 tmp.numServ = Model.rng.Next(1, 6);
-                Console.WriteLine(tmp.numServ);
                 int randomWs;
                 int i = 0;
                 //выбор цехов для посещения
@@ -41,20 +40,17 @@ namespace CarService.Logic
                     {
                         tmp.needWs[randomWs] = true;
                         i++;
-                        Console.Write(randomWs + "    ");
                     }   
                 }
-                Console.WriteLine();
                 //генерация времени выполнения заявки + вычисление стоимости услуг для каждого цеха
                 for (int j = 0; j < 5; j++)
                 {
                     if (tmp.needWs[j] == false)
                         continue;
-                    tmp.timeForWs[j] = serviceObj.workshop[j].getWorkTime();
+                    tmp.timeForWs[j] = serviceObj.workshop[j].getWorkTime(modelObj.wsErrorPr[j]);
                     tmp.priceForWs[j] = serviceObj.workshop[j].getPrice(tmp.timeForWs[j]);
-                    Console.Write(tmp.timeForWs[j] + "    ");
+                    tmp.overallTimeInCarService = modelObj.totalCarTimeInService;
                 }
-                Console.WriteLine();
                 //передача заявки в автосервис
                 serviceObj.newRequest = tmp;
             }
@@ -96,7 +92,7 @@ namespace CarService.Logic
             timeForWs = new int[5];
             priceForWs = new double[5];
             actualWorkshop = null;
-            overallTimeInCarService = 7 * 24 * 60; //общее время нахождеия авто в сервисе
+            overallTimeInCarService = 0; //общее время нахождеия авто в сервисе
         }
     }
 }

@@ -9,20 +9,28 @@ namespace CarService.Logic
 {
     public class Statistics : DependencyObject
     {
+        public static readonly DependencyProperty StepMProperty;
+
         public static readonly DependencyProperty RequestGenProperty;
 
-        public static readonly DependencyProperty Ws0Property;
+        public static readonly DependencyProperty Ws0Property; //состояние 1 цеха
 
-        public static readonly DependencyProperty Ws1Property;
+        public static readonly DependencyProperty Ws1Property; //состояние 2 цеха
 
-        public static readonly DependencyProperty Ws2Property;
+        public static readonly DependencyProperty Ws2Property; //состояние 3 цеха
 
-        public static readonly DependencyProperty Ws3Property;
+        public static readonly DependencyProperty Ws3Property; //состояние 4 цеха
 
-        public static readonly DependencyProperty Ws4Property;
+        public static readonly DependencyProperty Ws4Property; //состояние 5 цеха
 
         static Statistics()
         {
+            PropertyMetadata metadata = new PropertyMetadata();
+
+            metadata.DefaultValue = "3";
+
+            StepMProperty = DependencyProperty.Register("StepM", typeof(string), typeof(Statistics), metadata, new ValidateValueCallback(ValidateStepValue));
+
             RequestGenProperty = DependencyProperty.Register("RequestGen", typeof(string), typeof(Statistics));
 
             Ws0Property = DependencyProperty.Register("Ws0", typeof(int), typeof(Statistics));
@@ -30,6 +38,19 @@ namespace CarService.Logic
             Ws2Property = DependencyProperty.Register("Ws2", typeof(int), typeof(Statistics));
             Ws3Property = DependencyProperty.Register("Ws3", typeof(int), typeof(Statistics));
             Ws4Property = DependencyProperty.Register("Ws4", typeof(int), typeof(Statistics));
+        }
+
+        public static bool ValidateStepValue(object value)
+        {
+            string currentValue = (string)value;
+            int i;
+            return (int.TryParse(currentValue, out i));
+        }
+
+        public string StepM
+        {
+            get { return (string)GetValue(StepMProperty); }
+            set { SetValue(StepMProperty, value); }
         }
 
         public string RequestGen
@@ -72,24 +93,24 @@ namespace CarService.Logic
         CarWorld cw;
         public Statistics st;
 
-        //текущие параметры
+        //параметры
         public int overallTime; //общее время моделирования
         public int realTime; //оставшееся время моделирования
+        public int ovDay;
+        public byte ovHour;
+        public byte ovMin;
         public bool isWeekend;
         public byte timeDay;
         public byte timeHour; //время
         public byte timeMin;
-
-        //
-        //параметры моделирования
-        public double timeRatio { get; set; }
-        public double intensityRatio { get; set; }
-        public double errorIntensityRatio { get; set; }
-        public int numWorkshop { get; set; }
-
-        public readonly double peakRatio;
-        public readonly double ltRatio;
-
+        public int stepModel;
+        public double timeRatio;
+        public double intensityRatio;
+        public double[] wsErrorPr;
+        public int numWorkshop;
+        public double peakRatio;
+        public double ltRatio;
+        public int totalCarTimeInService;
         public byte[] numMasters;
         //
 
@@ -99,7 +120,10 @@ namespace CarService.Logic
         {
             peakRatio = 0.75;
             ltRatio = 0.5;
+            totalCarTimeInService = 7 * 24 * 60;
+            stepModel = 3;
             numMasters = new byte[5] { 5, 5, 5, 5, 5 };
+            wsErrorPr = new double[5] { 0.5, 0.5, 0.5, 0.5, 0.5 };
             st = s;
         }
 
@@ -107,7 +131,6 @@ namespace CarService.Logic
         {
             cs = new CarService(rng, numMasters, st);
             cw = new CarWorld(this, cs);
-            //set_times(0, 0, 0, 4560);
             set_times(0, 0, 0, 4*24*60);
         }
 
@@ -125,7 +148,6 @@ namespace CarService.Logic
 
         public void modeling()
         {
-            Console.WriteLine(overallTime);
             //моделирование работы СТО
             while (overallTime != 0)
             { 
@@ -147,14 +169,12 @@ namespace CarService.Logic
                 if (cs.newRequest != null)
                 {
                     st.RequestGen = cs.newRequest.numServ.ToString();
-                    Console.WriteLine("Номер заявки: " + cs.newRequest.numberRequest);
                 }
                 else
                     st.RequestGen = "No request";
                 //работа а/с
                 cs.work(isWeekend, timeHour, timeMin);
                 //изменение счетчиков
-                //st.RequestGen = cs.workshop.Count() + " - " + cs.workshop[0].masterInWs.Count + " - " + cs.workshop[0]
                 if (++timeMin >= 60)
                 {
                     timeMin = 0;

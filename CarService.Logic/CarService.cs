@@ -64,7 +64,6 @@ namespace CarService.Logic
                 //st.Ws4 = -1;
                 return;
             }
-            Console.WriteLine(h+ "   " + min + "   " + weekend);
             //проверка наличия новой заявки
             checkAddRequest();
             //random change of ws?????

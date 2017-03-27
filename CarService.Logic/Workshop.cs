@@ -28,7 +28,6 @@ namespace CarService.Logic
         {
             if (actualTimeRequest == null)
                 return 0;
-            Console.WriteLine("Master of " + cMW + " work with " + actualTimeRequest.numberRequest);
             //проверка на истечение срока нахождения на СТО
             if (--actualTimeRequest.overallTimeInCarService == 0)
                 return -1;
@@ -87,7 +86,7 @@ namespace CarService.Logic
         }
 
         //генерация времени выполнения заявки в текущем ws
-        public abstract int getWorkTime();
+        public abstract int getWorkTime(double errorPr);
 
         //генерация стоимости услуг + временной погрешности выполнения работ
         public abstract double getPrice(int time);
@@ -185,10 +184,14 @@ namespace CarService.Logic
     {
         public TechInspection(Random m, CarService cs, Statistics s, byte c = 1) : base(m, cs, c, s) { }
 
-        public override int getWorkTime()
+        public override int getWorkTime(double errorPr)
         {
             //время выполнения + погрешность 
-            return rnd.Next(25, 90) + rnd.Next(10, 25);
+            int mainTime = rnd.Next(25, 90);
+            double pr = rnd.NextDouble();
+            if (pr <= errorPr)
+                mainTime += rnd.Next(10, 25);
+            return mainTime;
         }
 
         public override double getPrice(int time)
@@ -199,7 +202,6 @@ namespace CarService.Logic
 
         public override void procWork()
         {
-            Console.WriteLine("Workshop #0 of" + numMasters);
             procCurWork(0);
         }
     }
@@ -207,10 +209,14 @@ namespace CarService.Logic
     {
         public BodyShops(Random m, CarService cs, Statistics s, byte c = 1) : base(m, cs, c, s) { }
 
-        public override int getWorkTime()
+        public override int getWorkTime(double errorPr)
         {
             //время выполнения + погрешность 
-            return rnd.Next(120, 2160) + rnd.Next(10, 720);
+            int mainTime = rnd.Next(120, 2160);
+            double pr = rnd.NextDouble();
+            if (pr <= errorPr)
+                mainTime += rnd.Next(10, 720);
+            return mainTime;
         }
 
         public override double getPrice(int time)
@@ -221,7 +227,6 @@ namespace CarService.Logic
 
         public override void procWork()
         {
-            Console.WriteLine("Workshop #1 of" + numMasters);
             procCurWork(1);
         }
     }
@@ -229,10 +234,14 @@ namespace CarService.Logic
     {
         public TireService(Random m, CarService cs, Statistics s, byte c = 1) : base(m, cs, c, s) { }
 
-        public override int getWorkTime()
+        public override int getWorkTime(double errorPr)
         {
-            //время выполнения + погрешность 
-            return rnd.Next(5, 20) + rnd.Next(2, 5);
+            //время выполнения + погрешность
+            int mainTime = rnd.Next(5, 20);
+            double pr = rnd.NextDouble();
+            if (pr <= errorPr)
+                mainTime += rnd.Next(2, 5);
+            return mainTime;
         }
 
         public override double getPrice(int time)
@@ -243,7 +252,6 @@ namespace CarService.Logic
 
         public override void procWork()
         {
-            Console.WriteLine("Workshop #2 of" + numMasters);
             procCurWork(2);
         }
     }
@@ -251,10 +259,14 @@ namespace CarService.Logic
     {
         public GearboxService(Random m, CarService cs, Statistics s, byte c = 1) : base(m, cs, c, s) { }
 
-        public override int getWorkTime()
+        public override int getWorkTime(double errorPr)
         {
-            //время выполнения + погрешность 
-            return rnd.Next(60, 2160) + rnd.Next(15, 720);
+            //время выполнения + погрешность
+            int mainTime = rnd.Next(60, 2160);
+            double pr = rnd.NextDouble();
+            if (pr <= errorPr)
+                mainTime += rnd.Next(15, 720);
+            return mainTime;
         }
 
         public override double getPrice(int time)
@@ -265,7 +277,6 @@ namespace CarService.Logic
 
         public override void procWork()
         {
-            Console.WriteLine("Workshop #3 of" + numMasters);
             procCurWork(3);
         }
     }
@@ -273,10 +284,14 @@ namespace CarService.Logic
     {
         public EngineService(Random m, CarService cs, Statistics s, byte c = 1) : base(m, cs, c, s) { }
 
-        public override int getWorkTime()
+        public override int getWorkTime(double errorPr)
         {
-            //время выполнения + погрешность 
-            return rnd.Next(20, 2880) + rnd.Next(5, 720);
+            //время выполнения + погрешность
+            int mainTime = rnd.Next(20, 2880);
+            double pr = rnd.NextDouble();
+            if (pr <= errorPr)
+                mainTime += rnd.Next(5, 720);
+            return mainTime;
         }
 
         public override double getPrice(int time)
@@ -287,7 +302,6 @@ namespace CarService.Logic
 
         public override void procWork()
         {
-            Console.WriteLine("Workshop #4 of" + numMasters);
             procCurWork(4);
         }
     }

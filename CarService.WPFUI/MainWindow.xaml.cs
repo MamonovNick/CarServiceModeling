@@ -23,17 +23,35 @@ namespace CarService.WPFUI
     public partial class MainWindow : Window
     {
         Model model;
+        bool modelingState;
         System.Windows.Forms.Timer stepTimer;
 
         public MainWindow()
         {
             model = new Model();
+            modelingState = true;
             stepTimer = new System.Windows.Forms.Timer();
             InitializeComponent();
             model.st = (Statistics)this.Resources["Rg"];
             model.create_objects();
             stepTimer.Enabled = false;
             stepTimer.Tick += OnStepTimer;
+        }
+
+
+
+        void trueModelingState()
+        {
+            StartBtn.IsEnabled = true;
+            StopBtn.IsEnabled = true;
+            StepBox.IsEnabled = true;
+        }
+
+        void falseModelingState()
+        {
+            StartBtn.IsEnabled = false;
+            StopBtn.IsEnabled = false;
+            StepBox.IsEnabled = false;
         }
 
         private void TS_EditValueChanged(object sender, DevExpress.Xpf.Editors.EditValueChangedEventArgs e)
@@ -65,32 +83,15 @@ namespace CarService.WPFUI
             model.numMasters[4] = (byte)((SpinEdit)sender).Value;
             this.pb4.Maximum = (byte)((SpinEdit)sender).Value;
         }
-
-        private void SliderOverallTime_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            //model.overallTime = (int)((Slider)sender).Value * 24 * 60;
-        }
-
-        private void SliderError_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-
-        }
         
         private void SliderIntens_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            //Txt2.Text = ((Slider)sender).Value.ToString();
             model.intensityRatio = ((Slider)sender).Value;
-        }
-
-        private void StartStopBtn_Click(object sender, RoutedEventArgs e)
-        {
-            model.modeling();
-            ProfitTxt.Text = model.getCSProfit();
         }
 
         private void StepBtn_Click(object sender, RoutedEventArgs e)
         {
-            model.simStep(int.Parse(stepNum.Text));
+            //model.simStep(int.Parse(stepNum.Text));
         }
 
         private void pb0_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -150,38 +151,37 @@ namespace CarService.WPFUI
 
         private void MDay_EditValueChanged(object sender, EditValueChangedEventArgs e)
         {
-
+            model.ovDay = (int)((SpinEdit)sender).Value;
         }
 
         private void MHour_EditValueChanged(object sender, EditValueChangedEventArgs e)
         {
-
+            model.ovHour = (byte)((SpinEdit)sender).Value;
         }
 
         private void MMin_EditValueChanged(object sender, EditValueChangedEventArgs e)
         {
-
+            model.ovMin = (byte)((SpinEdit)sender).Value;
         }
 
         private void StartHour_EditValueChanged(object sender, EditValueChangedEventArgs e)
         {
-            model.timeDay = byte.Parse(((TextBlock)sender).Text);
+            model.timeHour = (byte)((SpinEdit)sender).Value;
         }
 
         private void StartMin_EditValueChanged(object sender, EditValueChangedEventArgs e)
         {
-            model.timeHour = byte.Parse(((TextBlock)sender).Text);
+            model.timeMin = (byte)((SpinEdit)sender).Value;
         }
 
         private void StartDay_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            model.timeMin = byte.Parse(((TextBlock)sender).Text);
+            model.timeDay = (byte)((ComboBox)sender).SelectedIndex;
         }
 
         private void StartBtn_Click(object sender, RoutedEventArgs e)
         {
             stepTimer.Start();
-
         }
 
         private void StopBtn_Click(object sender, RoutedEventArgs e)
@@ -201,13 +201,60 @@ namespace CarService.WPFUI
             if (model.overallTime == 0)
             {
                 stepTimer.Stop();
+                modelingState = false;
+                falseModelingState();
                 MessageBox.Show("The End");
             }
         }
 
-        private void stepNum_TextInput(object sender, TextCompositionEventArgs e)
+        private void ws0ErrorPr_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            MessageBox.Show("Input");
+            model.wsErrorPr[0] = ((Slider)sender).Value / 100;
+        }
+
+        private void ws1ErrorPr_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            model.wsErrorPr[1] = ((Slider)sender).Value / 100;
+        }
+
+        private void ws2ErrorPr_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            model.wsErrorPr[2] = ((Slider)sender).Value / 100;
+        }
+
+        private void ws3ErrorPr_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            model.wsErrorPr[3] = ((Slider)sender).Value / 100;
+        }
+
+        private void ws4ErrorPr_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            model.wsErrorPr[4] = ((Slider)sender).Value / 100;
+        }
+
+        private void SliderPeakIntense_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            model.peakRatio = ((Slider)sender).Value / 100;
+        }
+
+        private void SliderLtIntense_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            model.ltRatio = ((Slider)sender).Value / 100;
+        }
+
+        private void SliderTotalCarTime_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            model.totalCarTimeInService = (int)(((Slider)sender).Value) * 24 * 60;
+        }
+
+        private void StepBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           // if()
+        }
+
+        private void ResetBtn_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
